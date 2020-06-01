@@ -1,0 +1,181 @@
+import processing.core.*;
+
+public class SquareSpace extends PApplet {
+
+	Form[] forms = new Form[5];
+	// using arrays to remove if statement dependancy
+	// Setting to a high number for now
+
+	int activeForm = -1;
+	// used in conjunction with array
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		PApplet.main("SquareSpace");
+	}
+
+	public void settings() {
+		setSize(1280, 720);
+	}
+
+	public void setup() {
+
+		forms[0] = new Form(this, color(255, 255, 250));
+		activeForm = 0;
+
+		fill(255, 255, 255);
+	}
+
+	public void draw() {
+		forms[activeForm].drawComponents();
+	}
+
+	public void mouseClicked() {
+		forms[activeForm].g.mouseClickAll();
+		// tbd
+	}
+
+}
+
+class Form {
+	// Base object which everything should be layered upon
+
+	PApplet parent;
+
+	int dispC;
+
+	// Can contain:
+	Grid g;
+
+	Form(PApplet p, int c) {
+		parent = p;
+		dispC = c;
+		parent.fill(dispC);
+		parent.rect(0, 0, (int) (parent.width * 2.0 / 3), parent.height);
+
+		g = new Grid(parent, 20, 10, 40, 0, 20, 100);
+
+		parent.fill(parent.color(0));
+		parent.textSize(32);
+		parent.text("Battle Squares. Click to Play.", 20, 60);
+		// Draw itself
+	}
+
+	public void drawComponents() {
+		g.drawAll();
+	}
+
+}
+
+// Components
+class Grid {
+	// Invisible object with no set dimensions; used as frame for square cells
+
+	PApplet parent;
+
+	Cell[][] squares;
+
+	int xSize, ySize, cellSize, gapSpace, x, y;
+
+	// Constructor
+	Grid(PApplet p, int xSize, int ySize, int cellSize, int gapSpace, int xPos, int yPos) {
+		parent = p;
+		this.xSize = xSize;
+		this.ySize = ySize;
+		this.cellSize = cellSize;
+		this.gapSpace = gapSpace;
+		x = xPos;
+		y = yPos;
+
+		// Initialize squares
+
+		squares = new Cell[xSize][ySize];
+
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				squares[x][y] = new Cell(parent, cellSize * (x + gapSpace) + this.x, cellSize * (y + gapSpace) + this.y,
+						x, y, cellSize);
+				// Applies offset of the grid component itself to each square
+			}
+		}
+	}
+
+	public void drawAll() {
+		// mirrors draw command to all squares
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				squares[x][y].draw();
+			}
+		}
+	}
+
+	public void mouseClickAll() {
+
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				// State logic
+				if (squares[x][y].containsMouse() && squares[x][y].state == 0)
+					squares[x][y].state++;
+				else if (squares[x][y].containsMouse())
+					squares[x][y].state--;
+			}
+		}
+	}
+
+}
+
+class Cell {
+	// Square objects drawn on screen, can contain occupants, and are the basis of
+	// interaction
+	int posX, posY, size, state, gridX, gridY;
+
+	PImage[] unitImg;
+
+	// x pos, y pos, side length, state variable
+
+	int[][] colours;
+	// 2D array; colours for each state, and a highlight layer
+	// i.e. [0][0] is base colour for state 0, while [1][0] is highlight colour for
+	// state 0
+
+	// Same infrastructure will be used in image textures for actual game
+
+	PApplet parent;
+
+	Cell(PApplet p, int px, int py, int gx, int gy, int size) {
+		parent = p;
+		colours = new int[][] { { parent.color(100, 100, 200), parent.color(65, 242, 183) },
+				{ parent.color(150, 150, 250), parent.color(132, 237, 202) } };
+
+		posX = px;
+		posY = py;
+		gridX = gx;
+		gridY = gy;
+		this.size = size;
+		unitImg = new PImage[] { parent.loadImage("ElementanTank.png"), parent.loadImage("EquanosTank.png") };
+		// TODO NEVER EVER EVER EVER EVER DRAW WITH AN IMAGE IN SETUP
+
+	}
+
+	public void draw() {
+
+		parent.fill(colours[this.containsMouse() ? 1 : 0][state]);
+		// Learned the ? operator - feels nice to use
+		// Essentially, uses ? operator to determine whether it's highlighted, then
+		// changes colour using AN ARRAY - faster decision
+
+		parent.rect(posX, posY, size, size);
+
+		parent.image(unitImg[state], posX + 10, posY + 10, size - 20, size - 20);
+	}
+
+	public boolean containsMouse() {
+		return (parent.mouseX > posX && parent.mouseX < posX + size && parent.mouseY > posY && parent.mouseY < posY + size);
+	}
+
+}
+
+class Occupant {
+	// Base class for units and buildings
+
+}

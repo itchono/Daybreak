@@ -1,0 +1,163 @@
+import processing.core.PApplet;
+
+public class SquareSpace extends PApplet{
+	
+	Form[] forms = new Form[5];
+	// using arrays to remove if statement dependancy
+	// Setting to a high number for now
+	
+	int activeForm = -1;
+	// used in conjunction with array
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		PApplet.main("SquareSpace");
+	}
+	
+	public void settings() {
+		setSize(1280, 720);
+	}
+	
+	public void setup() {
+		forms[0] = new Form(this, color(255, 255, 250));
+		activeForm = 0;
+		
+		fill(255, 255, 255);
+	}
+	
+	public void draw() {
+		forms[activeForm].draw();
+	}
+	
+	public void mouseClicked() {
+		forms[activeForm].g.mouseClickAll();
+		//tbd
+	}
+
+}
+
+class Form{
+	// Base object which everything should be layered upon
+	
+	PApplet parent;
+	
+	int dispC;
+	
+	// Can contain:
+	Grid g;
+	
+	Form(PApplet p, int c){
+		parent = p;
+		dispC = c;
+		g = new Grid(parent, 20, 10, 40, 0, 40, 100);
+	}
+	
+	public void draw() {
+		parent.fill(dispC);
+		parent.rect(0, 0, (int)(parent.width * 2.0/3), parent.height);
+		// Draw itself
+		
+		g.drawAll();
+	}
+	
+	
+}
+
+// Components
+class Grid{
+	// Invisible object with no set dimensions; used as frame for square cells
+	
+	PApplet parent;
+	
+	Cell[][] squares;
+	
+	int xSize, ySize, cellSize, gapSpace, x, y;
+	
+	// Constructor
+	Grid(PApplet p, int xSize, int ySize, int cellSize, int gapSpace, int xPos, int yPos) {
+		parent = p;
+		this.xSize = xSize;
+		this.ySize = ySize;
+		this.cellSize = cellSize;
+		this.gapSpace = gapSpace;
+		x = xPos;
+		y = yPos;
+		
+		// Initialize squares
+		
+		squares = new Cell[xSize][ySize];
+		
+		for (int x = 0; x<xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				squares[x][y] = new Cell(parent, cellSize * (x + gapSpace) + this.x, cellSize * (y + gapSpace) + this.y, cellSize);
+				// Applies offset of the grid component itself to each square
+			}
+		}
+	}
+	
+	public void drawAll() {
+		// mirrors draw command to all squares
+		for (int x = 0; x<xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				squares[x][y].draw();
+			}
+		}
+	}
+	
+	public void mouseClickAll() {
+		for (int x = 0; x<xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				if (squares[x][y].containsMouse())
+					squares[x][y].state = 1;
+			}
+		}
+	}
+	
+}
+
+class Cell {
+	// Square objects drawn on screen, can contain occupants, and are the basis of interaction
+	int x, y, size, state;
+
+	// x pos, y pos, side length, state variable
+	
+	int[] basecolours, highcolours;
+	
+	PApplet parent;
+	
+	Cell(PApplet p, int x, int y, int size){
+		parent = p;
+		basecolours = new int[] {parent.color(100, 100, 200), parent.color(42, 42, 42)};
+		highcolours = new int[] {parent.color(150, 150, 250), parent.color(60, 60, 60)};
+		// Define 0 -> base state; 1 -> highlight base; 2 -> clicked on
+		
+		this.x = x;
+		this.y = y;
+		this.size = size;
+		this.draw();
+		
+	}
+	
+	public void draw() {
+		
+		if (this.containsMouse())
+			parent.fill(highcolours[state]);
+		else
+			parent.fill(basecolours[state]);
+		
+		
+		parent.rect(x, y, size, size);
+	}
+	
+	public boolean containsMouse() {
+		return (parent.mouseX > x && parent.mouseX < x + size && parent.mouseY > y && parent.mouseY < y + size);
+	}
+	
+	
+	
+}
+
+class Occupant{
+	// Base class for units and buildings
+	
+}

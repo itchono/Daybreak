@@ -1,0 +1,83 @@
+Stats for units
+
+name = Elementan Tank
+attack = 15
+moveRange = 2
+attackRange = 2
+terrainType = 0
+image = UnitImages/ElementanTank.png
+
+name = Equanos Howitzer
+attack = 45
+moveRange = 0
+attackRange = 6
+terrainType = 0
+image = UnitImages/EquanosHowitzer.png
+
+name = Equanos Tank
+attack = 17
+moveRange = 3
+attackRange = 3
+terrainType = 0
+image = UnitImages/EquanosTank.png
+
+name = Infernus Tank
+attack = 20
+moveRange = 3
+attackRange = 3
+terrainType = 0
+image = UnitImages/InfernusTank.png
+
+
+name = Prisma Tank
+attack = 25
+moveRange = 2
+attackRange = 2
+terrainType = 0
+image = UnitImages/PrismaTank.png
+
+name = Surface to Surface Missile
+attack = 55
+moveRange = 0
+attackRange = 7
+terrainType = 0
+image = UnitImages/SurfacetoSurfaceMissile.png
+
+name = Umbra Stalker
+tbd make it stealth
+attack = 25
+moveRange = 3
+attackRange = 1
+terrainType = 0
+image = UnitImages/UmbraTank.png
+
+name = Elementan Manta Ray
+attack = 15
+moveRange = 3
+attackRange = 3
+terrainType = 2
+this means water AND land btw
+image = UnitImages/MantaRay.png
+
+name = Infernus Destroyer
+attack = 55
+moveRange = 1
+attackRange = 5
+terrainType = 1
+image = UnitImages/InfernusShip.png
+
+name = Elementan Submarine
+attack = 15
+moveRange = 4
+attackRange = 2
+terrainType = 1
+image = UnitImages/ElementanSub.png
+
+name = Equanos Battleship
+attack = 40
+moveRange = 4
+attackRange = 4
+terrainType = 1
+image = UnitImages/EquanosShip.png
+
+

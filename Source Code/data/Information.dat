@@ -1,0 +1,126 @@
+Stats for units
+
+name = Elementan Tank
+attack = 15
+hp = 75
+moveRange = 2
+atkRange = 2
+terrainType = 0
+cost = 500
+desc = This sturdy tank works well to soak up damage and still carry on.
+image = UnitImages/ElementanTank.png
+
+name = Equanos Howitzer
+attack = 25
+hp = 35
+moveRange = 0
+atkRange = 6
+terrainType = 0
+cost = 700
+desc = A powerful artillery rig. Cannot be moved.
+image = UnitImages/EquanosHowitzer.png
+
+name = Equanos Tank
+attack = 20
+hp = 60
+moveRange = 3
+atkRange = 3
+terrainType = 0
+cost = 600
+desc = An all round good tank, this unit offers mild tankiness combined with moderate damage.
+image = UnitImages/EquanosTank.png
+
+name = Infernus Tank
+attack = 25
+hp = 55
+moveRange = 3
+atkRange = 3
+terrainType = 0
+cost = 600
+desc = More damage focused, the infernus is the tank of choice chunk down opponents.
+image = UnitImages/InfernusTank.png
+
+
+name = Prisma Tank
+attack = 30
+hp = 40
+moveRange = 2
+atkRange = 2
+terrainType = 0
+cost = 500
+desc = What is essentially a laser on wheels, a hit from this tank is sure to hurt a lot.
+image = UnitImages/PrismaTank.png
+
+name = Surface Based Missile
+attack = 30
+hp = 25
+moveRange = 0
+atkRange = 7
+terrainType = 0
+cost = 1000
+desc = A hard hitting but fragile artillery placement. Cannot move.
+image = UnitImages/SurfacetoSurfaceMissile.png
+
+name = Umbra Stalker
+attack = 35
+hp = 30
+moveRange = 3
+atkRange = 1
+terrainType = 0
+cost = 400
+desc = A powerful tank optimized for stealthy takedowns - works only at close range!
+image = UnitImages/UmbraTank.png
+
+name = Mudskipper
+attack = 10
+hp = 40
+moveRange = 4
+atkRange = 2
+terrainType = 2
+this means water AND land btw
+cost = 500
+desc = An amphibious unit with long movement range. However, the designers had to make tradeoffs in terms of tankiness and firepower. 
+image = UnitImages/MantaRay.png
+
+name = Infernus Destroyer
+attack = 55
+hp = 85
+moveRange = 1
+atkRange = 5
+terrainType = 1
+cost = 2000
+desc = A terrifying foe to face anywhere. Its only weakness is its poor mobility.
+image = UnitImages/InfernusShip.png
+
+name = Deep Ranger Submarine
+attack = 15
+hp = 15
+moveRange = 4
+atkRange = 2
+terrainType = 1
+cost = 400
+desc = A fast travelling stealth unit with little to offer in terms of weapons or defense.
+image = UnitImages/ElementanSub.png
+
+name = Equanos Flagship
+attack = 40
+hp = 95
+moveRange = 4
+atkRange = 4
+terrainType = 1
+cost = 1700
+desc = A tanky ship with high mobility and moderately high damage.
+image = UnitImages/EquanosShip.png
+
+name = Prisma Attack Helicopter
+attack = 35
+hp = 15
+moveRange = 5
+atkRange = 5
+terrainType = 2
+cost = 1800
+desc = A flying cannon. This state of the art machine can cover immense distances, but is limited by its fragility.
+image = UnitImages/PrismaHelicopter.png
+
+
+
